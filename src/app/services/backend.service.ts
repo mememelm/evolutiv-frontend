@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { Ticket } from '../interfaces/ticket.interface';
-import { User } from '../interfaces/user.interface';
+import { Ticket } from '../../interfaces/ticket.interface';
+import { User } from '../../interfaces/user.interface';
 
 /**
  * This service acts as a mock back-end.
@@ -18,8 +18,8 @@ export class BackendService {
     public storedTickets: Ticket[] = [
         {
             id: 0,
-            completed: false,
-            assigneeId: 111,
+            completed: false, // true
+            assigneeId: 111, // null
             description: 'Install a monitor arm'
         },
         {
