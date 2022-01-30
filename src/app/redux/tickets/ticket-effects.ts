@@ -22,4 +22,16 @@ export class TicketsEffects {
             })
         )
     })
+
+    // postTicketEffect: Observable<Action> = createEffect(() => {
+    //     return this.effectActions.pipe(
+    //         ofType(TicketActionsTypes.POST_TICKETS),
+    //         mergeMap((action) => {
+    //             return this.ctrl.api.newTicket(action).pipe(
+    //                 map((ticket) => new PostTicketsActionSuccess(ticket)),
+    //                 catchError((error) => of(new GetAllTicketsActionError(error.message)))
+    //             )
+    //         })
+    //     )
+    // })
 }

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Ajouter Ticket</h1>
+<form [formGroup]="ticketForm">
+  <div mat-dialog-content>
+    <mat-form-field class="example-full-width wd" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="closeModal()">Fermer</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true"
+      (click)="addTicket(ticketForm.value)">Ajouter</button>
+  </div>
+</form>

@@ -1,4 +1,4 @@
-<h2>Tickets</h2>
+<!-- <h2 class="text-success">Tickets</h2>
 
 <div *ngIf="tickets$ | async as state" [ngSwitch]="state.dataState">
     <div *ngSwitchCase="ticketsStateEnum.INITIAL">
@@ -23,5 +23,57 @@
     </div>
     <div *ngSwitchCase="ticketsStateEnum.ERROR">
         {{state.errorMessage}}
+    </div>
+</div> -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <button mat-raised-button color="primary" class="mgl" (click)="openModalTicketAdd()">
+                <mat-icon>library_add</mat-icon> Ajouter
+            </button>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field appearance="standard">
+                <mat-label>Recherche</mat-label>
+                <input matInput name="cond" placeholder="Ex. ium" #input>
+            </mat-form-field>
+        </div>
+    </div>
+    <div>
+        <div class="row" *ngIf="tickets$ | async as state" [ngSwitch]="state.dataState">
+            <div *ngSwitchCase="ticketsStateEnum.INITIAL">
+                Init state
+            </div>
+            <div *ngSwitchCase="ticketsStateEnum.LOADING">
+                Loading ...
+            </div>
+            <div class="row" *ngSwitchCase="ticketsStateEnum.SUCCESS">
+                <div class="col-md-6 col-lg-3" *ngFor="let ticket of state.tickets">
+                    <mat-card class="example-card">
+                        <mat-card-title>Ticket Numéro {{ticket.id}} <span *ngIf="ticket?.completed == true">
+                                <mat-icon class="color-icon">verified_user</mat-icon>
+                            </span>
+                        </mat-card-title>
+                        <mat-card-content>
+                            <p><span *ngIf="ticket?.assigneeId !== null">
+                                    <mat-icon>person</mat-icon> {{ticket?.assigneeId}}
+                                </span><span *ngIf="ticket?.assigneeId == null">
+                                    <mat-icon>person_off</mat-icon>
+                                </span></p>
+                            <p>
+                                <mat-icon>local_offer</mat-icon>
+                                {{ticket?.description}}
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-icon-button color="primary">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

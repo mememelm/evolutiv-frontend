@@ -14,24 +14,45 @@ import { TicketListComponent } from './components/pages/tickets/ticket-list/tick
 import { TicketDetailComponent } from './components/pages/tickets/ticket-detail/ticket-detail.component';
 import { ticketsReducer } from './redux/tickets/ticket-reducer';
 import { TicketsEffects } from './redux/tickets/ticket-effects';
-import { FormsModule, FormBuilder } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { usersReducer } from './redux/users/user.reducers';
+import { TicketAddComponent } from './components/pages/tickets/ticket-add/ticket-add.component';
+
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatCardModule } from "@angular/material/card";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatOptionModule } from "@angular/material/core";
+
+const materialModules = [
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatOptionModule
+]
 
 @NgModule({
-    declarations: [AppComponent, TicketListComponent, TicketDetailComponent],
+    declarations: [AppComponent, TicketListComponent, TicketDetailComponent, TicketAddComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         RoutingModule,
         FormsModule,
+        ReactiveFormsModule,
+        ...materialModules,
         StoreModule.forRoot({ ticketsState: ticketsReducer, usersState: usersReducer }),
         EffectsModule.forRoot([TicketsEffects, UsersEffects]),
         StoreDevtoolsModule.instrument()
     ],
-    providers: [BackendService, FormBuilder],
+    providers: [BackendService, FormBuilder, MatDialog],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {
-
-}
+export class AppModule { }

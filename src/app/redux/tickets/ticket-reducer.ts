@@ -1,4 +1,4 @@
-import { TicketActionsTypes, TicketsActions } from './ticket-actions';
+import { TicketActionsTypes, TicketsActions, AddTicketsActionParent } from './ticket-actions';
 import { Ticket } from '../../constants/models/ticket.interface';
 import { StateEnum } from 'src/app/constants/shared/default-state-reducer';
 
@@ -22,6 +22,8 @@ export function ticketsReducer(state: TicketsState = initState, action: TicketsA
             return { ...state, dataState: StateEnum.SUCCESS, tickets: action.payload }
         case TicketActionsTypes.GET_ALL_TICKETS_ERROR:
             return { ...state, dataState: StateEnum.ERROR, errorMessage: action.payload }
+        case TicketActionsTypes.ADD_TICKET:
+            return { ...state, dataState: StateEnum.ERROR, tickets: action.payload }
         default: return { ...state }
     }
 }

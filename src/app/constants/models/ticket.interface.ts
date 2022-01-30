@@ -1,4 +1,4 @@
-export interface Ticket {
+export class Ticket {
     id: number;
     completed: boolean;
     assigneeId: number;
