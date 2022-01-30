@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { Ticket } from '../../interfaces/ticket.interface';
-import { User } from '../../interfaces/user.interface';
+import { Ticket } from '../constants/models/ticket.interface';
+import { User } from '../constants/models/user.interface';
 
 /**
  * This service acts as a mock back-end.
@@ -75,7 +75,7 @@ export class BackendService {
             return of(foundTicket).pipe(
                 delay(randomDelay()),
                 tap((ticket: Ticket) => {
-                    ticket.assigneeId = +userId;
+                    return ticket.assigneeId = +userId;
                 })
             );
         }
@@ -90,7 +90,7 @@ export class BackendService {
             return of(foundTicket).pipe(
                 delay(randomDelay()),
                 tap((ticket: Ticket) => {
-                    ticket.completed = true;
+                    ticket.completed = completed;
                 })
             );
         }

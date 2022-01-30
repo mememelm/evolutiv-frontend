@@ -1,5 +1,5 @@
-import { Ticket } from './../../../interfaces/ticket.interface';
 import { Action } from "@ngrx/store";
+import { Ticket } from '../../constants/models/ticket.interface';
 
 export enum TicketActionsTypes {
     GET_ALL_TICKETS = '[Tickets] Get all tickets',

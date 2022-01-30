@@ -1,33 +1,27 @@
 import { TicketActionsTypes, TicketsActions } from './ticket-actions';
-import { Ticket } from './../../../interfaces/ticket.interface';
-
-export enum TicketsStateEnum {
-    LOADING = 'Loading',
-    SUCCESS = 'Success',
-    ERROR = 'Error',
-    INITIAL = 'Initial'
-}
+import { Ticket } from '../../constants/models/ticket.interface';
+import { StateEnum } from 'src/app/constants/shared/default-state-reducer';
 
 export interface TicketsState {
     tickets: Ticket[]
     errorMessage: string
-    dataState: TicketsStateEnum
+    dataState: StateEnum
 }
 
 const initState: TicketsState = {
     tickets: [],
     errorMessage: '',
-    dataState: TicketsStateEnum.INITIAL
+    dataState: StateEnum.INITIAL
 }
 
 export function ticketsReducer(state: TicketsState = initState, action: TicketsActions): TicketsState {
     switch (action.type) {
         case TicketActionsTypes.GET_ALL_TICKETS:
-            return { ...state, dataState: TicketsStateEnum.LOADING }
+            return { ...state, dataState: StateEnum.LOADING }
         case TicketActionsTypes.GET_ALL_TICKETS_SUCCESS:
-            return { ...state, dataState: TicketsStateEnum.SUCCESS, tickets: action.payload }
+            return { ...state, dataState: StateEnum.SUCCESS, tickets: action.payload }
         case TicketActionsTypes.GET_ALL_TICKETS_ERROR:
-            return { ...state, dataState: TicketsStateEnum.ERROR, errorMessage: action.payload }
+            return { ...state, dataState: StateEnum.ERROR, errorMessage: action.payload }
         default: return { ...state }
     }
 }
