@@ -1,9 +1,12 @@
-
 import { Component, OnInit } from '@angular/core';
-import { Ticket } from './../../../../../interfaces/ticket.interface';
-import { User } from './../../../../../interfaces/user.interface';
 import { Observable } from 'rxjs';
-import { BackendService } from './../../../../services/backend.service';
+import { TicketsState } from 'src/app/redux/tickets/ticket-reducer';
+
+import { ControllerService } from './../../../../services/controller.service';
+import { TicketsStateEnum } from './../../../../redux/tickets/ticket-reducer';
+import { GetAllTicketsAction } from './../../../../redux/tickets/ticket-actions';
+
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ticket-list',
@@ -12,12 +15,18 @@ import { BackendService } from './../../../../services/backend.service';
 })
 export class TicketListComponent implements OnInit {
 
-  readonly users$: Observable<User[]> = this.backendService.users();
-  readonly tickets$: Observable<Ticket[]> = this.backendService.tickets();
+  tickets$: Observable<TicketsState> | null = null
+  readonly ticketsStateEnum = TicketsStateEnum
 
-  constructor(private readonly backendService: BackendService) { }
-
+  constructor(private ctrl: ControllerService) { }
+  
   ngOnInit(): void {
+    this.ctrl.store.dispatch(new GetAllTicketsAction({}))
+    this.tickets$ = this.ctrl.store.pipe(
+      map((state) => {
+        return state.ticketsState
+      })
+    )
   }
 
 }
